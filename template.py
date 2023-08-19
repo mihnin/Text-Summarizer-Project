@@ -1,15 +1,12 @@
-# Импортируем необходимые модули
 import os
 from pathlib import Path
 import logging
 
-# Настраиваем логирование
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
-# Задаем имя проекта
+
 project_name = "textSummarizer"
 
-# Задаем список файлов, которые необходимо создать
 list_of_files = [
     ".github/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
@@ -30,24 +27,25 @@ list_of_files = [
     "requirements.txt",
     "setup.py",
     "research/trials.ipynb",
+
 ]
 
-# Создаем файлы
+
 for filepath in list_of_files:
     filepath = Path(filepath)
     filedir, filename = os.path.split(filepath)
 
-    # Если директория не существует, то создаем ее
     if filedir != "":
         os.makedirs(filedir, exist_ok=True)
         logging.info(f"Creating directory:{filedir} for the file {filename}")
 
-    # Если файл не существует или пустой, то создаем его
+    
     if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
         with open(filepath,'w') as f:
             pass
             logging.info(f"Creating empty file: {filepath}")
 
-    # Если файл уже существует, то выводим сообщение об этом
+
+    
     else:
         logging.info(f"{filename} is already exists")
