@@ -1,4 +1,5 @@
 from textSummarizer.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
+<<<<<<< HEAD
 # Импортируем класс DataIngestionTrainingPipeline из модуля stage_01_data_ingestion 
 # в пакете pipeline в проекте textSummarizer
 
@@ -58,3 +59,18 @@ try:
 except Exception as e: # обрабатываем исключение
         logger.exception(e) # логируем ошибку с помощью объекта logger
         raise e # выбрасываем исключение, чтобы прервать выполнение программы
+=======
+
+from textSummarizer.logging import logger
+
+
+STAGE_NAME = "Data Ingestion stage"
+try:
+   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+   data_ingestion = DataIngestionTrainingPipeline()
+   data_ingestion.main()
+   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+        logger.exception(e)
+        raise e
+>>>>>>> d021832c63440171a1a0531580f3a4685fbe0f71

@@ -1,14 +1,16 @@
-import os # импортируем модуль os
-from pathlib import Path # импортируем класс Path
-import logging # импортируем модуль логирования
+# Импортируем необходимые модули
+import os
+from pathlib import Path
+import logging
 
-logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:') 
-# настраиваем логирование
+# Настраиваем логирование
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
+# Задаем имя проекта
+project_name = "textSummarizer"
 
-project_name = "textSummarizer" # имя проекта
-
-list_of_files = [ # список файлов и директорий, которые необходимо создать
+# Задаем список файлов, которые необходимо создать
+list_of_files = [
     ".github/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
     f"src/{project_name}/conponents/__init__.py",
@@ -31,23 +33,22 @@ list_of_files = [ # список файлов и директорий, кото�
 
 ]
 
+# Создаем файлы
+for filepath in list_of_files:
+    filepath = Path(filepath)
+    filedir, filename = os.path.split(filepath)
 
-for filepath in list_of_files: # для каждого файла в списке файлов
-    filepath = Path(filepath) # преобразуем путь к файлу в объект типа Path
-    filedir, filename = os.path.split(filepath) # разделяем путь к файлу на путь к директории и имя файла
+    # Если директория не существует, то создаем ее
+    if filedir != "":
+        os.makedirs(filedir, exist_ok=True)
+        logging.info(f"Creating directory:{filedir} for the file {filename}")
 
-    if filedir != "": # если путь к директории не пустой
-        os.makedirs(filedir, exist_ok=True) # создаем директорию
-        logging.info(f"Creating directory:{filedir} for the file {filename}") # логируем создание 
-        # директории
+    # Если файл не существует или пустой, то создаем его
+    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
+        with open(filepath,'w') as f:
+            pass
+            logging.info(f"Creating empty file: {filepath}")
 
-    
-    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0): # если файл не существует
-        with open(filepath,'w') as f: # открываем файл на запись
-            pass # ничего не делаем
-            logging.info(f"Creating empty file: {filepath}") # логируем создание пустого файла
-
-
-    
-    else: # если файл существует
-        logging.info(f"{filename} is already exists") # логируем, что файл уже существует
+    # Если файл уже существует, то выводим сообщение об этом
+    else:
+        logging.info(f"{filename} is already exists")

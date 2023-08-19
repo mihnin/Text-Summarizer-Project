@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from dataclasses import dataclass # импорт декоратора для создания неизменяемого класса
 from pathlib import Path # импорт класса для работы с путями
 
@@ -19,3 +20,14 @@ class DataTransformationConfig: # класс для хранения конфи�
     root_dir: Path # путь к корневой директории
     data_path: Path # путь к файлу с данными
     tokenizer_name: Path # путь к файлу с токенайзером
+=======
+from dataclasses import dataclass
+from pathlib import Path
+
+@dataclass(frozen=True)
+class DataIngestionConfig:
+    root_dir: Path
+    source_URL: str
+    local_data_file: Path
+    unzip_dir: Path
+>>>>>>> d021832c63440171a1a0531580f3a4685fbe0f71
