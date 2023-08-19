@@ -1,54 +1,30 @@
-# Импортируем необходимые модули
-import os
-from pathlib import Path
-import logging
+import setuptools
 
-# Настраиваем логирование
-logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = f.read()
 
-# Задаем имя проекта
-project_name = "textSummarizer"
 
-# Задаем список файлов, которые необходимо создать
-list_of_files = [
-    ".github/workflows/.gitkeep",
-    f"src/{project_name}/__init__.py",
-    f"src/{project_name}/conponents/__init__.py",
-    f"src/{project_name}/utils/__init__.py",
-    f"src/{project_name}/utils/common.py",
-    f"src/{project_name}/logging/__init__.py",
-    f"src/{project_name}/config/__init__.py",
-    f"src/{project_name}/config/configuration.py",
-    f"src/{project_name}/pipeline/__init__.py",
-    f"src/{project_name}/entity/__init__.py",
-    f"src/{project_name}/constants/__init__.py",
-    "config/config.yaml",
-    "params.yaml",
-    "app.py",
-    "main.py",
-    "Dockerfile",
-    "requirements.txt",
-    "setup.py",
-    "research/trials.ipynb",
+__version__ = "0.0.0"
 
-]
+REPO_NAME = "Text-Summarizer-Project"
+AUTHOR_USER_NAME = "entbappy"
+SRC_REPO = "textSummarizer"
+AUTHOR_EMAIL = "entbappy73@gmail.com"
 
-# Создаем файлы
-for filepath in list_of_files:
-    filepath = Path(filepath)
-    filedir, filename = os.path.split(filepath)
 
-    # Если директория не существует, то создаем ее
-    if filedir != "":
-        os.makedirs(filedir, exist_ok=True)
-        logging.info(f"Creating directory:{filedir} for the file {filename}")
 
-    # Если файл не существует или пустой, то создаем его
-    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
-        with open(filepath,'w') as f:
-            pass
-            logging.info(f"Creating empty file: {filepath}")
-
-    # Если файл уже существует, то выводим сообщение об этом
-    else:
-        logging.info(f"{filename} is already exists")
+setuptools.setup(
+    name=SRC_REPO,
+    version=__version__,
+    author=AUTHOR_USER_NAME,
+    author_email=AUTHOR_EMAIL,
+    description="A small python package for NLP app",
+    long_description=long_description,
+    long_description_content="text/markdown",
+    url=f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}",
+    project_urls={
+        "Bug Tracker": f"https://github.com/{AUTHOR_USER_NAME}/{REPO_NAME}/issues",
+    },
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src")
+)
