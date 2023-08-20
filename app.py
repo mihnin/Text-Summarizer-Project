@@ -43,4 +43,4 @@ async def predict_route(text): # функция для предсказания
     
 
 if __name__=="__main__": # если файл запускается как главный
-    uvicorn.run(app, host="127.0.0.1", port=8080) # запускаем сервер
+    uvicorn.run(app, host="0.0.0.0", port=7777) # запускаем сервер
