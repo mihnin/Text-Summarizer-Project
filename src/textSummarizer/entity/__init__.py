@@ -24,3 +24,17 @@ class DataTransformationConfig:
     data_path: Path
     tokenizer_name: Path
 
+@dataclass(frozen=True) # неизменяемый класс
+class ModelTrainerConfig: # конфигурация для обучения модели
+    root_dir: Path # корневая директория
+    data_path: Path # путь к данным
+    model_ckpt: Path # путь к чекпоинту модели
+    num_train_epochs: int # количество эпох
+    warmup_steps: int # количество шагов для прогрева
+    per_device_train_batch_size: int # размер батча
+    weight_decay: float # коэффициент регуляризации
+    logging_steps: int # шаги логирования
+    evaluation_strategy: str # стратегия оценки
+    eval_steps: int # шаги оценки
+    save_steps: float # шаги сохранения
+    gradient_accumulation_steps: int # шаги накопления градиента
