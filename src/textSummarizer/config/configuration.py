@@ -3,7 +3,8 @@ from textSummarizer.utils.common import read_yaml, create_directories
 from textSummarizer.entity import (DataIngestionConfig,
                                    DataValidationConfig,
                                    DataTransformationConfig,
-                                   ModelTrainerConfig)
+                                   ModelTrainerConfig,
+                                   ModelEvaluationConfig)
 
 
 class ConfigurationManager:
@@ -84,3 +85,19 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig: # получить конфигурацию для оценки модели
+        config = self.config.model_evaluation # получить конфигурацию для оценки модели
+
+        create_directories([config.root_dir]) # создать директорию
+
+        model_evaluation_config = ModelEvaluationConfig( # создать конфигурацию для оценки модели
+            root_dir=config.root_dir, # путь к директории
+            data_path=config.data_path, # путь к данным
+            model_path = config.model_path, # путь к модели
+            tokenizer_path = config.tokenizer_path, # путь к токенайзеру
+            metric_file_name = config.metric_file_name # имя файла с метриками
+           
+        )
+
+        return model_evaluation_config # вернуть конфигурацию для оценки модели

@@ -38,3 +38,12 @@ class ModelTrainerConfig: # конфигурация для обучения м�
     eval_steps: int # шаги оценки
     save_steps: float # шаги сохранения
     gradient_accumulation_steps: int # шаги накопления градиента
+    
+
+@dataclass(frozen=True) # неизменяемый класс
+class ModelEvaluationConfig: # конфигурация для оценки модели
+    root_dir: Path # корневая директория
+    data_path: Path # путь к данным
+    model_path: Path # путь к модели
+    tokenizer_path: Path # путь к токенайзеру
+    metric_file_name: Path # имя файла с метриками
