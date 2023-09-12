@@ -1,7 +1,0 @@
-{
-    "github.copilot-labs.showTestGenerationLenses": true,
-    "github.copilot-labs.showBrushesLenses": true,
-    "python.analysis.extraPaths": [
-        "./Text-Summarizer-Project/src"
-    ]
-}
